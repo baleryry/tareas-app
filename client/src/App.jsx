@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import Formulario from "./components/Formulario.jsx";
 import ListaTareas from "./components/ListaTareas.jsx";
 
-const API = "http://localhost:3001/api/tareas";
+const API_BASE = (
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:3001"
+).replace(/\/$/, "");
+
+const API = `${API_BASE}/api/tareas`;
 
 export default function App() {
   const [tareas, setTareas] = useState([]);

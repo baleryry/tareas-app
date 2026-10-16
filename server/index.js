@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "http://localhost:5173"
+}));
 app.use(express.json());
 
 // Datos en memoria (luego los cambias por una base de datos)
@@ -44,6 +46,8 @@ app.delete("/api/tareas/:id", (req, res) => {
   res.status(204).send();
 });
 
-app.listen(3001, () => {
-  console.log("API corriendo en http://localhost:3001");
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`API corriendo en el puerto ${PORT}`);
 });
